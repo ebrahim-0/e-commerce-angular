@@ -1,0 +1,35 @@
+<header class="sticky top-0 bg-[#f8f9fa] py-4 z-10 shadow-md">
+  <nav class="container flex items-center justify-between mx-auto px-9">
+    <a routerLink="/">
+      <img
+        src="assets/images/oc-logo.svg"
+        alt="logo"
+        class="w-[120px] sm:w-[200px]"
+      />
+    </a>
+    <ul id="nav-mobile" class="flex items-center gap-4">
+      @if(currentUser){
+      <li class="my-3 capitalize cursor-pointer">
+        {{ currentUser?.name }}
+      </li>
+      <li (click)="logout()">
+        <button
+          type="button"
+          class="p-button-danger"
+          label="Logout"
+          pButton
+        ></button>
+      </li>
+      } @else {
+      <li class="capitalize cursor-pointer" routerLink="/login">
+        <a>Login</a>
+      </li>
+      <li class="capitalize cursor-pointer" routerLink="/register">
+        <a>Register</a>
+      </li>
+      }
+    </ul>
+  </nav>
+</header>
+
+<p-toast></p-toast>

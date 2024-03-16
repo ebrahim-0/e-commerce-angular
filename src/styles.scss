@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+  @tailwind base;
+}
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+@layer tailwind-utilities {
+  @tailwind components;
+  @tailwind utilities;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f8f9fa;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.p-inputtext,
+.p-password,
+p-inputnumber,
+.p-inputnumber,
+.p-password input {
+  width: 100%;
+}
+
+.p-dialog-content {
+  padding-top: 35px;
+}
+
+.p-dialog-header {
+  padding-bottom: 0;
+}
+
+.p-inline-message {
+  width: 100%;
+  margin-top: 5px;
+  justify-content: start;
+}

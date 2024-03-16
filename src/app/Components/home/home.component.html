@@ -1,0 +1,51 @@
+<div
+  class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+>
+  @for (product of products; track $index) {
+
+  <app-product
+    (edit)="toggleEditPopup($event)"
+    (delete)="toggleDeletePopup($event)"
+    [product]="product"
+  ></app-product>
+
+  }
+</div>
+
+<p-paginator
+  styleClass="my-9 bg-inherit"
+  (onPageChange)="onPageChange($event)"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [rowsPerPageOptions]="[6, 12, 20]"
+  #paginator
+></p-paginator>
+
+<button
+  type="button"
+  pButton
+  icon="pi pi-plus"
+  (click)="toggleAddPopup()"
+  label="Add Product"
+  class="fixed bottom-8 right-8"
+></button>
+
+<!-- Edit Product -->
+<app-edit-popup
+  [product]="selectedProduct"
+  (confirm)="onConfirmEdit($event)"
+  [(display)]="displayEdit"
+  header="Edit Product"
+  message="Product Edited Successfully"
+></app-edit-popup>
+
+<!-- Add Product -->
+
+<app-edit-popup
+  (confirm)="onConfirmAdd($event)"
+  [(display)]="displayAdd"
+  header="Add Product"
+  message="Product Added Successfully"
+></app-edit-popup>
+
+<p-toast></p-toast>

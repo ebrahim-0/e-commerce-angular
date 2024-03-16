@@ -1,0 +1,95 @@
+<p-dialog
+  [header]="header"
+  [(visible)]="display"
+  [style]="{ width: '50vw' }"
+  [modal]="true"
+  [closable]="false"
+>
+  <form
+    class="flex flex-col gap-6"
+    (submit)="onConfirm()"
+    [formGroup]="productForm"
+  >
+    <div>
+      <p-floatLabel>
+        <input id="name" type="text" pInputText formControlName="name" />
+        <label for="name">Name</label>
+      </p-floatLabel>
+
+      @if(productForm.get('name')?.invalid && productForm.get('name')?.touched){
+      @if(productForm.get('name')?.getError('required')){
+      <p-message severity="error" text="Name is required"></p-message>
+
+      } @else if(productForm.get('name')?.getError('minlength')){
+      <p-message
+        severity="error"
+        text="Name should be at least 3 characters"
+      ></p-message>
+
+      } }
+    </div>
+
+    <div>
+      <p-floatLabel>
+        <p-inputNumber
+          formControlName="price"
+          inputId="price"
+          mode="currency"
+          currency="USD"
+        >
+        </p-inputNumber>
+
+        <label for="price">Price</label>
+      </p-floatLabel>
+      @if(productForm.get('price')?.invalid &&
+      productForm.get('price')?.touched){
+      @if(productForm.get('price')?.getError('required')){
+      <p-message
+        severity="error"
+        class="capitalize"
+        text="price is required"
+      ></p-message>
+
+      } }
+    </div>
+
+    <div>
+      <p-floatLabel>
+        <input id="image" type="text" pInputText formControlName="image" />
+        <label for="image">Image</label>
+      </p-floatLabel>
+      @if(productForm.get('image')?.invalid &&
+      productForm.get('image')?.touched){
+      @if(productForm.get('image')?.getError('required')){
+      <p-message
+        severity="error"
+        class="capitalize"
+        text="image is required"
+      ></p-message>
+
+      } }
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <span class="text-xs ms-3">Rating</span>
+      <p-rating
+        formControlName="rating"
+        iconCancelClass="false"
+        [readonly]="false"
+      ></p-rating>
+    </div>
+    <p-footer class="flex justify-between">
+      <button type="submit" pButton icon="pi pi-check" label="Confirm"></button>
+      <button
+        type="button"
+        pButton
+        class="p-button-danger"
+        icon="pi pi-times"
+        (click)="onCancel()"
+        label="Cancel"
+      ></button>
+    </p-footer>
+  </form>
+</p-dialog>
+
+<p-toast></p-toast>

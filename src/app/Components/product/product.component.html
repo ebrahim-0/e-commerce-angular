@@ -1,0 +1,37 @@
+<p-card
+  #card
+  header="{{
+    product.name | truncateName : truncateLength || product.name.length : '...'
+  }}"
+  styleClass="text-nowrap"
+  subheader="{{ product.price | currency }}"
+>
+  <ng-template pTemplate="header">
+    <img [src]="product.image" [alt]="product.name" />
+  </ng-template>
+
+  <p-rating
+    [(ngModel)]="product.rating"
+    [readonly]="true"
+    [cancel]="false"
+  ></p-rating>
+
+  <div class="flex justify-between mt-3">
+    <p-button
+      type="button"
+      size="small"
+      icon="pi pi-pencil"
+      (click)="editProduct()"
+      label="Edit"
+    ></p-button>
+
+    <p-button
+      type="button"
+      severity="danger"
+      size="small"
+      icon="pi pi-trash"
+      (click)="deleteProduct()"
+      label="Delete"
+    ></p-button>
+  </div>
+</p-card>

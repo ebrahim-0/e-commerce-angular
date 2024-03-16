@@ -1,0 +1,60 @@
+<form
+  class="w-3/4 m-auto p-4"
+  [formGroup]="loginForm"
+  (ngSubmit)="login(loginForm)"
+>
+  <div class="flex flex-col mb-4 pt-3 relative">
+    <p-floatLabel>
+      <input id="email" type="email" pInputText formControlName="email" />
+      <label for="email">Email</label>
+    </p-floatLabel>
+
+    @if(loginForm.get('email')?.invalid && loginForm.get('email')?.touched){
+    @if(loginForm.get('email')?.getError('required')){
+    <p-message severity="error" text="Email is required"></p-message>
+
+    } @else if (loginForm.get('email')?.getError('email')) {
+    <p-message severity="error" text="Email is invalid"></p-message>
+
+    } }
+  </div>
+  <div class="flex flex-col mb-4 pt-3 relative">
+    <p-floatLabel>
+      <p-password
+        type="password"
+        id="password"
+        [toggleMask]="true"
+        placeholder=""
+        formControlName="password"
+      />
+      <label for="password">Password</label>
+    </p-floatLabel>
+
+    @if(loginForm.get('password')?.invalid &&
+    loginForm.get('password')?.touched){
+    @if(loginForm.get('password')?.getError('required')){
+    <p-message severity="error" text="Password is required"></p-message>
+
+    } @else if (loginForm.get('password')?.getError('pattern')) {
+    <p-message
+      severity="error"
+      text="Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"
+    ></p-message>
+    } }
+  </div>
+
+  <button type="submit" pButton pRipple class="p-button-info gap-1">
+    @if(loading){
+    <p-progressSpinner
+      styleClass="w-5 h-5"
+      strokeWidth="8"
+      ariaLabel="loading"
+      fill="transparent"
+      animationDuration="1s"
+    ></p-progressSpinner>
+
+    } Login
+  </button>
+</form>
+
+<p-toast></p-toast>
